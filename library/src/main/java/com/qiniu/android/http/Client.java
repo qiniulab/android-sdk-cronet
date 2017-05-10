@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.qiniu.android.common.Constants;
 import com.qiniu.android.dns.DnsManager;
-import com.qiniu.android.storage.UpCancellationSignal;
 import com.qiniu.android.storage.UpToken;
 import com.qiniu.android.utils.AsyncRun;
 import com.qiniu.android.utils.ContextGetter;

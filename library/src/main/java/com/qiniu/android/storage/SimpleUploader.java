@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.qiniu.android.http.Client;
 import com.qiniu.android.http.CompletionHandler;
-import com.qiniu.android.http.PostArgs;
 import com.qiniu.android.http.ProgressHandler;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.utils.AndroidNetwork;
