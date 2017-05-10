@@ -7,15 +7,10 @@ import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpToken;
 import com.qiniu.android.utils.UrlSafeBase64;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,7 +28,7 @@ public final class AutoZone extends Zone {
     public static final AutoZone autoZone = new AutoZone(null);
 
     public AutoZone(DnsManager dns) {
-        this("https://uc.qbox.me", dns);
+        this("https://proxy-uc-qbox-me.qnssl.com", dns);
     }
 
     AutoZone(String ucServer, DnsManager dns) {

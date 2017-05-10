@@ -5,6 +5,7 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.util.Log;
 
+import com.qiniu.android.common.AutoZone;
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.http.ResponseInfo;
@@ -30,7 +31,7 @@ public class ResumeUploadTest extends InstrumentationTestCase {
     private volatile JSONObject resp;
 
     public void setUp() throws Exception {
-        Configuration config = new Configuration.Builder().build();
+        Configuration config = new Configuration.Builder().zone(FixedZone.zone0).useHttps(true).build();
         uploadManager = new UploadManager(config);
         ACollectUploadInfoTest.testInit();
     }

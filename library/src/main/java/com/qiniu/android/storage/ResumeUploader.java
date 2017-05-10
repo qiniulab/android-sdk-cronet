@@ -139,6 +139,7 @@ final class ResumeUploader implements Runnable {
         }
         this.crc32 = Crc32.bytes(chunkBuffer, 0, chunkSize);
         String postUrl = String.format("%s%s", upHost, path);
+        headers.put("Content-Type", "application/octet-stream");
         post(postUrl, chunkBuffer, 0, chunkSize, progress, _completionHandler, c);
     }
 
@@ -156,6 +157,7 @@ final class ResumeUploader implements Runnable {
         this.crc32 = Crc32.bytes(chunkBuffer, 0, chunkSize);
 
         String postUrl = String.format("%s%s", upHost, path);
+        headers.put("Content-Type", "application/octet-stream");
         post(postUrl, chunkBuffer, 0, chunkSize, progress, _completionHandler, c);
     }
 
@@ -182,6 +184,7 @@ final class ResumeUploader implements Runnable {
         String bodyStr = StringUtils.join(contexts, ",");
         byte[] data = bodyStr.getBytes();
         String postUrl = String.format("%s%s", upHost, path);
+        headers.put("Content-Type", "text/plain");
         post(postUrl, data, 0, data.length, null, _completionHandler, c);
     }
 
@@ -248,7 +251,7 @@ final class ResumeUploader implements Runnable {
         final int chunkSize = (int) calcPutSize(offset);
         ProgressHandler progress = new ProgressHandler() {
             @Override
-            public void onProgress(int bytesWritten, int totalSize) {
+            public void onProgress(long bytesWritten, long totalSize) {
                 double percent = (double) (offset + bytesWritten) / size;
                 if (percent > 0.95) {
                     percent = 0.95;

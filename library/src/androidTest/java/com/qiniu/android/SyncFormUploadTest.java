@@ -3,6 +3,7 @@ package com.qiniu.android;
 import android.test.InstrumentationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.util.Log;
 
 import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.common.Zone;
@@ -25,6 +26,8 @@ public class SyncFormUploadTest extends InstrumentationTestCase {
     private volatile String key;
     private volatile ResponseInfo info;
     private volatile JSONObject resp;
+
+    private static String TAG = "SyncFormUploadTest";
 
     public void setUp() throws Exception {
         uploadManager = new UploadManager();
@@ -138,7 +141,7 @@ public class SyncFormUploadTest extends InstrumentationTestCase {
         params.put("x:foo", "fooval");
         final UploadOptions opt = new UploadOptions(params, null, true, null, null);
         info = uploadManager.syncPut(f, expectKey, TestConfig.token_z0, opt);
-
+        Log.d(TAG, "testFile: " + info);
         resp = info.response;
         key = resp.optString("key");
         Assert.assertEquals(info.toString(), expectKey, key);

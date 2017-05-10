@@ -1,12 +1,8 @@
 package com.qiniu.android.http;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 
-import okhttp3.Authenticator;
-import okhttp3.Credentials;
-import okhttp3.Route;
 
 /**
  * http 代理
@@ -41,15 +37,16 @@ public final class ProxyConfiguration {
         return new Proxy(type, new InetSocketAddress(hostAddress, port));
     }
 
-    Authenticator authenticator() {
-        return new Authenticator() {
-            @Override
-            public okhttp3.Request authenticate(Route route, okhttp3.Response response) throws IOException {
-                String credential = Credentials.basic(user, password);
-                return response.request().newBuilder().
-                        header("Proxy-Authorization", credential).
-                        header("Proxy-Connection", "Keep-Alive").build();
-            }
-        };
-    }
+//    Authenticator authenticator() {
+//        return new Authenticator() {
+//            @Override
+//            public okhttp3.Request authenticate(Route route, okhttp3.Response response) throws IOException {
+//                String credential = Credentials.basic(user, password);
+//                return response.request().newBuilder().
+//                        header("Proxy-Authorization", credential).
+//                        header("Proxy-Connection", "Keep-Alive").build();
+//            }
+//        };
+//    }
+
 }
