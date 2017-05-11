@@ -46,7 +46,7 @@ public final class FixedZone extends Zone {
      */
     public static final Zone zoneNa0 = new FixedZone(new String[]{
             "proxy-upload-na0-qiniu-com.qnssl.com", "proxy-up-na0-qiniup-com.qnssl.com",
-            "upload-na0-qbox-me.qnssl.com", "proxy-up-na0-qbox-me.qnssl.com"
+            "proxy-upload-na0-qbox-me.qnssl.com", "proxy-up-na0-qbox-me.qnssl.com"
     });
 
     private ZoneInfo zoneInfo;
@@ -72,9 +72,7 @@ public final class FixedZone extends Zone {
     @Override
     public synchronized String upHost(String upToken, boolean useHttps, String frozenDomain) {
         String upHost = this.upHost(this.zoneInfo, useHttps, frozenDomain);
-        for (Map.Entry<String, Long> entry : this.zoneInfo.upDomainsMap.entrySet()) {
-            Log.d("Qiniu.FixedZone", entry.getKey() + ", " + entry.getValue());
-        }
+        Log.d("Qiniu.FixedZone", upHost + ", " + this.zoneInfo.upDomainsMap);
         return upHost;
     }
 

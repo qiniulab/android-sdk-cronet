@@ -58,6 +58,8 @@ public final class Client {
 
     private static String TAG = "Client";
 
+
+
     public Client() {
         this(null, 10, 30, null, null);
     }
@@ -628,7 +630,8 @@ public final class Client {
 
         @Override
         public void onFailed(UrlRequest request, UrlResponseInfo info, CronetException error) {
-            Log.d(TAG, "onFailed: " + error.getCause());
+            Log.d(TAG, "onFailed: " + info);
+            Log.d(TAG, "onFailed: " + error + " : \n" + error.getCause());
             stop = System.currentTimeMillis();
             Throwable e = error.getCause();
             if (e == null) {
