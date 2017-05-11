@@ -236,7 +236,7 @@ public final class Client {
             httpProtocol = url.getProtocol();
         }
 
-        Log.d(TAG, "buildResponseInfo: " + "  " + host + " : " + port + " : " + path + " : " + httpProtocol + " : " + urlStr);
+        Log.d(TAG, "buildResponseInfo: " + " : " + protocol + " : " + httpProtocol + " : "  + host + " : " + port + " : " + path + " : " + urlStr);
 
         String body = null;
         String error = null;
