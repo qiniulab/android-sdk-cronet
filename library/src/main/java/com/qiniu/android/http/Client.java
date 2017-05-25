@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.qiniu.android.common.Constants;
-import com.qiniu.android.dns.DnsManager;
 import com.qiniu.android.storage.UpToken;
 import com.qiniu.android.utils.AsyncRun;
 import com.qiniu.android.utils.ContextGetter;
@@ -24,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -61,10 +61,10 @@ public final class Client {
 
 
     public Client() {
-        this(null, 10, 30, null, null);
+        this(null, 10, 30, null);
     }
 
-    public Client(ProxyConfiguration proxy, int connectTimeout, int responseTimeout, UrlConverter converter, final DnsManager dns) {
+    public Client(ProxyConfiguration proxy, int connectTimeout, int responseTimeout, UrlConverter converter) {
         this.converter = converter;
         if (cronetEngine == null) {
             if (context == null) {
@@ -92,12 +92,11 @@ public final class Client {
                     new LinkedBlockingQueue<Runnable>());
         }
 
-        // TODO  超时参数怎么设置 ？？ 貌似失败是会等待很久很久
+        // TODO  超时参数怎么设置 ？？默认超时大概 105秒
 //        builder.connectTimeout(connectTimeout, TimeUnit.SECONDS);
 //        builder.readTimeout(responseTimeout, TimeUnit.SECONDS);
 //        builder.writeTimeout(0, TimeUnit.SECONDS);
     }
-
 
 
     public void asyncPost(String url, byte[] body, int offset, int size,
@@ -673,7 +672,7 @@ public final class Client {
 
         // TODO ???
         private String getRemoteIp() {
-            return "unkown";
+            return "";
         }
 
 

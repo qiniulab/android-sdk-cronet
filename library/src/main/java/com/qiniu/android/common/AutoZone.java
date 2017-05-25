@@ -1,6 +1,5 @@
 package com.qiniu.android.common;
 
-import com.qiniu.android.dns.DnsManager;
 import com.qiniu.android.http.Client;
 import com.qiniu.android.http.CompletionHandler;
 import com.qiniu.android.http.ResponseInfo;
@@ -25,13 +24,13 @@ public final class AutoZone extends Zone {
     /**
      * 自动判断机房
      */
-    public static final AutoZone autoZone = new AutoZone(null);
+    public static final AutoZone autoZone = new AutoZone();
 
-    public AutoZone(DnsManager dns) {
-        this("https://proxy-uc-qbox-me.qnssl.com", dns);
+    public AutoZone() {
+        this("https://proxy-uc-qbox-me.qnssl.com");
     }
 
-    AutoZone(String ucServer, DnsManager dns) {
+    AutoZone(String ucServer) {
         this.ucServer = ucServer;
     }
 

@@ -3,11 +3,6 @@ package com.qiniu.android.storage;
 
 import com.qiniu.android.common.AutoZone;
 import com.qiniu.android.common.Zone;
-import com.qiniu.android.dns.DnsManager;
-import com.qiniu.android.dns.IResolver;
-import com.qiniu.android.dns.NetworkInfo;
-import com.qiniu.android.dns.local.AndroidDnsServer;
-import com.qiniu.android.dns.local.Resolver;
 import com.qiniu.android.http.ProxyConfiguration;
 import com.qiniu.android.http.UrlConverter;
 
@@ -58,11 +53,6 @@ public final class Configuration {
     public UrlConverter urlConverter;
 
     /**
-     * dns 解析客户端
-     */
-    public DnsManager dns;
-
-    /**
      * 上传区域
      */
     public Zone zone;
@@ -92,12 +82,6 @@ public final class Configuration {
         urlConverter = builder.urlConverter;
 
         zone = builder.zone == null ? AutoZone.autoZone : builder.zone;
-        dns = initDns(builder);
-    }
-
-    private static DnsManager initDns(Builder builder) {
-        DnsManager d = builder.dns;
-        return d;
     }
 
     private KeyGenerator getKeyGen(KeyGenerator keyGen) {
@@ -125,17 +109,9 @@ public final class Configuration {
         private int responseTimeout = 60;
         private int retryMax = 3;
         private UrlConverter urlConverter = null;
-        private DnsManager dns = null;
 
         public Builder() {
-            IResolver r1 = AndroidDnsServer.defaultResolver();
-            IResolver r2 = null;
-            try {
-                r2 = new Resolver(InetAddress.getByName("119.29.29.29"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            dns = new DnsManager(NetworkInfo.normal, new IResolver[]{r1, r2});
+
         }
 
         public Builder zone(Zone zone) {
@@ -186,11 +162,6 @@ public final class Configuration {
 
         public Builder urlConverter(UrlConverter converter) {
             this.urlConverter = converter;
-            return this;
-        }
-
-        public Builder dns(DnsManager dns) {
-            this.dns = dns;
             return this;
         }
 
