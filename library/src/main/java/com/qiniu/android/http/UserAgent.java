@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import com.qiniu.android.common.Constants;
 import com.qiniu.android.utils.StringUtils;
 
+import org.chromium.net.ApiVersion;
+
 import java.nio.charset.Charset;
 import java.util.Locale;
 import java.util.Random;
@@ -35,8 +37,8 @@ public final class UserAgent {
     }
 
     private static String getUserAgent(String id) {
-        return format("QiniuAndroid/%s (%s; %s; %s", Constants.VERSION,
-                osVersion(), device(), id);
+        return format("QiniuAndroid/%s/Cronet/%s (%s; %s; %s",
+                Constants.VERSION, ApiVersion.getCronetVersion(), osVersion(), device(), id);
     }
 
     private static String osVersion() {

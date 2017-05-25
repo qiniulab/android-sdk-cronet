@@ -112,7 +112,7 @@ public class ACollectUploadInfoTest extends AndroidTestCase {
     }
 
     public static void recordFileTest() {
-//        showRecordInfo();
+        showRecordInfo();
         recordFile();
         ACollectUploadInfoUpTest.recordFileTest();
     }
@@ -122,7 +122,7 @@ public class ACollectUploadInfoTest extends AndroidTestCase {
         Log.d("recordFile", "recordFile.getAbsolutePath(): " + recordFile.getAbsolutePath());
         Log.d("recordFile", "recordFile.length(): " + recordFile.length());
         Log.d("recordFile", "recordFile.lastModified(): " + new Date(recordFile.lastModified()));
-        showContent(recordFile);
+//        showContent(recordFile);
     }
 
     private static void showContent(File recordFile) {

@@ -30,7 +30,7 @@ public class ResumeUploadTest extends InstrumentationTestCase {
     private volatile JSONObject resp;
 
     public void setUp() throws Exception {
-        Configuration config = new Configuration.Builder().build();
+        Configuration config = new Configuration.Builder().zone(FixedZone.zone0).useHttps(true).build();
         uploadManager = new UploadManager(config);
         ACollectUploadInfoTest.testInit();
     }
@@ -134,6 +134,11 @@ public class ResumeUploadTest extends InstrumentationTestCase {
     @LargeTest
     public void test4M() throws Throwable {
         template(1024 * 4);
+    }
+
+    @LargeTest
+    public void test2M100K() throws Throwable {
+        template(1024 * 2 + 100);
     }
 
 //    @LargeTest
