@@ -24,7 +24,7 @@ android {
     buildToolsVersion '24.0.2'
     defaultConfig {
         //applicationId "com.qiniu.android"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 24
         versionCode code
         versionName version

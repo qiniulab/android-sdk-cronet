@@ -43,7 +43,7 @@ public class HttpsTest extends InstrumentationTestCase {
     @SmallTest
     public void testPost1() throws Throwable {
         byte[] bs = "hello".getBytes();
-        httpManager.asyncPost("https://www.baidu.com/", bs, 0, bs.length , null,
+        httpManager.asyncPost("https://www.baidu.com/", bs, 0, bs.length, null,
                 UpToken.parse(TestConfig.token_z0), null, new CompletionHandler() {
                     @Override
                     public void complete(ResponseInfo rinfo, JSONObject response) {

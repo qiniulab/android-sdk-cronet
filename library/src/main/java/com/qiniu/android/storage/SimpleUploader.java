@@ -58,8 +58,8 @@ final class SimpleUploader {
     }
 
     private static void post(final byte[] data, final File file, final String key, final UpToken token,
-                              final UpCompletionHandler completionHandler,
-                              UploadOptions optionsIn, final Client client, final Configuration config) {
+                             final UpCompletionHandler completionHandler,
+                             UploadOptions optionsIn, final Client client, final Configuration config) {
         final UploadOptions options = optionsIn != null ? optionsIn : UploadOptions.defaultOptions();
         boolean success = config.zone.preQuery(token.token);
         if (!success) {
@@ -126,7 +126,7 @@ final class SimpleUploader {
         final ProgressHandler progress = new ProgressHandler() {
             @Override
             public void onProgress(long bytesWritten, long totalSize) {
-                double percent = ((double)bytesWritten) / totalSize;
+                double percent = ((double) bytesWritten) / totalSize;
                 if (percent > 0.95) {
                     percent = 0.95;
                 }
@@ -309,7 +309,7 @@ final class SimpleUploader {
         final ProgressHandler progress = new ProgressHandler() {
             @Override
             public void onProgress(long bytesWritten, long totalSize) {
-                double percent = ((double)bytesWritten) / totalSize;
+                double percent = ((double) bytesWritten) / totalSize;
                 if (percent > 0.95) {
                     percent = 0.95;
                 }

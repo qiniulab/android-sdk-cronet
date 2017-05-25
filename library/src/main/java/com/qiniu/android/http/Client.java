@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Method;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -57,7 +56,6 @@ public final class Client {
     private final static int CodePlaceholder = Integer.MAX_VALUE;
 
     private static String TAG = "Client";
-
 
 
     public Client() {
@@ -114,8 +112,8 @@ public final class Client {
 
 
     public ResponseInfo syncPost(String url, byte[] body, int offset, int size,
-                          StringMap headers, final UpToken upToken, ProgressHandler progressHandler,
-                          CompletionHandler completionHandler, CancellationHandler c) {
+                                 StringMap headers, final UpToken upToken, ProgressHandler progressHandler,
+                                 CompletionHandler completionHandler, CancellationHandler c) {
         ClientUploadDataProvider uploadDataProvider;
         if (body != null && body.length > 0) {
             uploadDataProvider = createUploadDataProvider(progressHandler, c, body, offset, size);
@@ -134,8 +132,8 @@ public final class Client {
     }
 
     public ResponseInfo syncPost(String url, File file,
-                          StringMap headers, final UpToken upToken, ProgressHandler progressHandler,
-                          CompletionHandler completionHandler, CancellationHandler c) {
+                                 StringMap headers, final UpToken upToken, ProgressHandler progressHandler,
+                                 CompletionHandler completionHandler, CancellationHandler c) {
         ClientUploadDataProvider uploadDataProvider = createUploadDataProvider(progressHandler, c, file);
 
         return syncSend(url, uploadDataProvider, headers, progressHandler, completionHandler, c, upToken, 0, TimeUnit.SECONDS);
@@ -170,7 +168,7 @@ public final class Client {
 
     private static String header(Map<String, List<String>> headers, String h) {
         List<String> hs = headers.get(h);
-        if (hs == null){
+        if (hs == null) {
             return "";
         }
         if (hs.size() > 0) {
@@ -237,7 +235,7 @@ public final class Client {
             httpProtocol = url.getProtocol();
         }
 
-        Log.d(TAG, "buildResponseInfo: " + " : " + protocol + " : " + httpProtocol + " : "  + host + " : " + port + " : " + path + " : " + urlStr);
+        Log.d(TAG, "buildResponseInfo: " + " : " + protocol + " : " + httpProtocol + " : " + host + " : " + port + " : " + path + " : " + urlStr);
 
         String body = null;
         String error = null;
@@ -250,7 +248,7 @@ public final class Client {
         if (body != null && "application/json".equalsIgnoreCase(ctype)) {
             try {
                 json = buildJsonResp(body);
-                if (code != 200) {;
+                if (code != 200) {
                     error = json.optString("error", body);
                 }
             } catch (Exception e) {
@@ -271,10 +269,10 @@ public final class Client {
 
 
     private static ResponseInfo onRet(final CompletionHandler complete,
-                              int aCode, UrlResponseInfo info, ByteArrayOutputStream bytesReceived,
-                              Throwable ex, String remoteIp, long sent,
-                              long duration, final UpToken upToken
-                              ) {
+                                      int aCode, UrlResponseInfo info, ByteArrayOutputStream bytesReceived,
+                                      Throwable ex, String remoteIp, long sent,
+                                      long duration, final UpToken upToken
+    ) {
         final ResponseInfo responseInfo = buildResponseInfo(aCode, info, bytesReceived, ex, remoteIp, sent, duration, upToken);
         Log.d(TAG, "onRet: " + responseInfo);
         Log.d(TAG, "onRet: " + responseInfo.response);
@@ -456,7 +454,9 @@ public final class Client {
     private static final class FileUploadProvider extends ClientUploadDataProvider {
         private volatile FileChannel mChannel;
         private final FileChannelProvider mProvider;
-        /** Guards initalization of {@code mChannel} */
+        /**
+         * Guards initalization of {@code mChannel}
+         */
         private final Object mLock = new Object();
         private final ProgressHandler progressHandler;
         private final CancellationHandler c;
@@ -536,7 +536,6 @@ public final class Client {
     }
 
 
-
     private static class ClientCallback extends UrlRequest.Callback {
         private ByteArrayOutputStream bytesReceived = new ByteArrayOutputStream();
         private WritableByteChannel receiveChannel = Channels.newChannel(bytesReceived);
@@ -558,13 +557,12 @@ public final class Client {
         private ResponseInfo responseInfo;
 
         ClientCallback(ClientUploadDataProvider senter, CompletionHandler completionHandler,
-                   UpToken upToken) {
+                       UpToken upToken) {
             this(senter, completionHandler, upToken, false);
         }
 
         ClientCallback(ClientUploadDataProvider senter, CompletionHandler completionHandler,
-                           UpToken upToken,
-                           boolean sync) {
+                       UpToken upToken, boolean sync) {
             this.senter = senter;
             this.completionHandler = completionHandler;
             this.upToken = upToken;

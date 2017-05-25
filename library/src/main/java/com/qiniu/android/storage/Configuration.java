@@ -7,8 +7,6 @@ import com.qiniu.android.http.ProxyConfiguration;
 import com.qiniu.android.http.UrlConverter;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
 
 public final class Configuration {
 
