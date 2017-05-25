@@ -8,13 +8,20 @@
 ## 演示代码
 https://github.com/qiniudemo/qiniu-lab-android
 
+## 已知问题
+SimpleUploader 上传使用 put 接口，不支持魔法变量 fname 、ext 等。导致 com.qiniu.android.SyncFormUploadTest > testFile 测试失败；
+超时参数设置无效；
+不能设置 happly-dns ；
+失败状态码和 qiniu-android-sdk 不完全一致，com.qiniu.android.HttpTest 内几个状态码判断失败；
+
+
 ## 安装
 
 ### 运行环境
 
 | Qiniu SDK Cronet 版本 | 最低 Android版本   |       依赖库版本           |
 |------------ |-----------------|------------------------|
-|  0.0.x        |  Android 4.0+     |        cronet 58         |
+|  0.0.x        |  Android 4.0+     |        cronet         |
 
 ### 直接安装
 将sdk jar文件 复制到项目中去，[下载地址](http://search.maven.org/remotecontent?filepath=com/qiniu/qiniu-android-sdk-cronet/) 还有对应的依赖库
@@ -24,8 +31,24 @@ https://github.com/qiniudemo/qiniu-lab-android
 * 如果在Adroid Studio中使用，添加dependencies `compile 'com.qiniu:qiniu-android-sdk-cronet:0.0.+'` 或在项目中添加maven依赖
 * 如果是eclipse, 也可以直接添加依赖来处理。
 
+### 其它依赖项
+
+cronet_version=58.0.3029.99
+可在 https://www.chromestatus.com/features 查看稳定的版本
+
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/cronet_api.jar
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/cronet_impl_common_java.jar
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/cronet_impl_native_java.jar
+
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/libs/arm64-v8a/libcronet.so
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/libs/armeabi-v7a/libcronet.so
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/libs/armeabi/libcronet.so
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/libs/mips/libcronet.so
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/libs/x86_64/libcronet.so
+https://storage.googleapis.com/chromium-cronet/android/${cronet_version}/Release/cronet/libs/x86/libcronet.so
+
 ## 使用方法
-UploadManager 可以创建一次，一直使用。
+UploadManager 可以创建一次，一直使用。不要每次上传都新建。
 ```java
 import com.qiniu.android.storage.UploadManager;
 ...
