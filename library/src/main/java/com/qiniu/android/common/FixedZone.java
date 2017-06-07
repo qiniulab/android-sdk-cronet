@@ -69,6 +69,15 @@ public final class FixedZone extends Zone {
         return new ZoneInfo(0, upDomainsList, upDomainsMap);
     }
 
+    /**
+     * 获取上传域名，指定 caddy 端口
+     */
+    @Override
+    protected String upHost(ZoneInfo zoneInfo, boolean useHttps, String lastUpHost) {
+        String upHost = super.upHost(zoneInfo, useHttps, lastUpHost);
+        return upHost + (useHttps ? ":8443" : ":8080");
+    }
+
     @Override
     public synchronized String upHost(String upToken, boolean useHttps, String frozenDomain) {
         String upHost = this.upHost(this.zoneInfo, useHttps, frozenDomain);

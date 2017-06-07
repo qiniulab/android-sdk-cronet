@@ -78,7 +78,7 @@ public class ResumeUploadTest extends InstrumentationTestCase {
         String[] s = new String[]{"up.qbox.me"};
         Zone z = new FixedZone(s);
         Configuration c = new Configuration.Builder()
-                .zone(z)
+                .zone(FixedZone.zone0)
                 .build();
         UploadManager uploadManager2 = new UploadManager(c);
         uploadManager2.put(f, expectKey, TestConfig.token_z0, new UpCompletionHandler() {
