@@ -160,6 +160,16 @@ public final class ResponseInfo {
         return create(null, InvalidFile, "", "", "", "", "", "", 80, 0, 0, e.getMessage(), upToken);
     }
 
+    public static ResponseInfo networkError(int code, UpToken upToken) {
+        return create(null, code, "", "", "", "", "", "", 80, 0, 0, "Network error during preQuery", upToken);
+    }
+
+    public static boolean isStatusCodeForBrokenNetwork(int code) {
+        return code == NetworkError || code == UnknownHost
+                || code == CannotConnectToHost || code == TimedOut
+                || code == NetworkConnectionLost;
+    }
+
     public boolean isCancelled() {
         return statusCode == Cancelled;
     }
@@ -184,8 +194,10 @@ public final class ResponseInfo {
     }
 
     public boolean needRetry() {
-        return !isCancelled() && (needSwitchServer() || statusCode == 406
-                || (statusCode == 200 && error != null));
+        return !isCancelled() && (
+                needSwitchServer() || statusCode == 406 ||
+                        (statusCode == 200 && error != null) || (isNotQiniu() && !upToken.hasReturnUrl())
+        );
     }
 
     public boolean isNotQiniu() {
