@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by long on 2016/9/29.
  */
 
-public final class AutoZone extends Zone {
+final class AutoZone extends Zone {
     private Map<ZoneIndex, ZoneInfo> zones = new ConcurrentHashMap<>();
     private Client client = new Client();
     private final String ucServer;
@@ -88,11 +88,14 @@ public final class AutoZone extends Zone {
                         ZoneInfo info2 = ZoneInfo.buildFromJson(response);
                         zones.put(index, info2);
                         complete.onSuccess();
+                        return;
                     } catch (JSONException e) {
                         e.printStackTrace();
                         complete.onFailure(ResponseInfo.NetworkError);
+                        return;
                     }
                 }
+                complete.onFailure(info.statusCode);
             }
         });
     }

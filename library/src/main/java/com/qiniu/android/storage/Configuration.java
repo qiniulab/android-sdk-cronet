@@ -1,7 +1,6 @@
 package com.qiniu.android.storage;
 
 
-import com.qiniu.android.common.AutoZone;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.http.ProxyConfiguration;
 import com.qiniu.android.http.UrlConverter;
@@ -79,7 +78,7 @@ public final class Configuration {
 
         urlConverter = builder.urlConverter;
 
-        zone = builder.zone == null ? AutoZone.autoZone : builder.zone;
+        zone = builder.zone;
     }
 
     private KeyGenerator getKeyGen(KeyGenerator keyGen) {
@@ -169,6 +168,9 @@ public final class Configuration {
         }
 
         public Configuration build() {
+            if (zone == null) {
+                throw new RuntimeException("no zone selected");
+            }
             return new Configuration(this);
         }
     }
